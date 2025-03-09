@@ -32,6 +32,14 @@ class LevelManager {
     getCell(x, z) {
         const gridX = Math.round(x / this.gridSize + this.currentLevel[0].length / 2 - 0.5);
         const gridZ = Math.round(z / this.gridSize + this.currentLevel.length / 2 - 0.5);
+        
+        // Return undefined (wall) if coordinates are out of bounds
+        if (gridX < 0 || gridZ < 0 || 
+            gridX >= this.currentLevel[0].length || 
+            gridZ >= this.currentLevel.length) {
+            return undefined;
+        }
+        
         return this.currentLevel[gridZ]?.[gridX];
     }
 
