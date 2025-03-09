@@ -13,8 +13,8 @@ class BoxGame {
         this.gameEngine.init();
         
         // Load audio
-        await this.audioManager.addSound('box', '../win.mp3', 0.5);
-        await this.audioManager.addSound('win', '../win.mp3', 0.8);
+        await this.audioManager.addSound('box', 'win.mp3', 0.5);
+        await this.audioManager.addSound('win', 'win.mp3', 0.8);
         this.audioManager.attachToCamera(this.gameEngine.camera);
 
         // Setup controls
