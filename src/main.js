@@ -13,8 +13,8 @@ class BoxGame {
         this.gameEngine.init();
         
         // Load audio
-        await this.audioManager.addSound('box', 'win.mp3', 0.5);
-        await this.audioManager.addSound('win', 'win.mp3', 0.8);
+        await this.audioManager.addSound('box', '../win.mp3', 0.5);
+        await this.audioManager.addSound('win', '../win.mp3', 0.8);
         this.audioManager.attachToCamera(this.gameEngine.camera);
 
         // Setup controls
@@ -23,6 +23,14 @@ class BoxGame {
 
         // Load levels
         const levels = [
+            [
+                [1, 1, 1, 1, 1, 1],
+                [1, 0, 0, 1, 0, 1],
+                [1, 0, 2, 0, 0, 1],
+                [1, 4, 0, 0, 0, 1],
+                [1, 3, 0, 0, 1, 1],
+                [1, 1, 1, 1, 1, 1],
+            ],
             [
                 [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
                 [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
@@ -34,13 +42,7 @@ class BoxGame {
                 [1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 4, 1],
                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
             ],
-            [
-                [0, 0, 3, 2, 0],
-                [0, 0, 0, 0, 0],
-                [4, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0]
-            ]
+            
         ];
         
         levels.forEach(level => this.levelManager.addLevel(level));
