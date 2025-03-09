@@ -1,13 +1,32 @@
 class LevelManager {
     constructor() {
+        this.levels = [];
+        this.currentLevelIndex = 0;
         this.currentLevel = null;
         this.initialLevel = null;
         this.gridSize = 2;
     }
 
-    loadLevel(levelData) {
-        this.currentLevel = levelData;
-        this.initialLevel = JSON.parse(JSON.stringify(levelData));
+    addLevel(levelData) {
+        this.levels.push(levelData);
+    }
+
+    nextLevel() {
+        if (this.currentLevelIndex < this.levels.length - 1) {
+            this.currentLevelIndex++;
+            this.loadLevel(this.currentLevelIndex);
+            return true;
+        }
+        return false;
+    }
+
+    loadLevel(levelIndex) {
+        if (typeof levelIndex === 'number') {
+            this.currentLevel = this.levels[levelIndex];
+        } else {
+            this.currentLevel = levelIndex;
+        }
+        this.initialLevel = JSON.parse(JSON.stringify(this.currentLevel));
     }
 
     getCell(x, z) {

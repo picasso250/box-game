@@ -19,20 +19,32 @@ class BoxGame {
 
         // Setup controls
         document.addEventListener('keydown', (e) => this.handleKeyDown(e));
+        document.getElementById('next-level-btn').addEventListener('click', () => this.handleNextLevel());
 
-        // Load initial level
-        const initialLevel = [
-            [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-            [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-            [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-            [0, 0, 0, 1, 3, 0, 0, 0, 0, 1, 0, 0],
-            [1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [1, 0, 0, 0, 1, 2, 2, 1, 0, 0, 0, 1],
-            [1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 4, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        // Load levels
+        const levels = [
+            [
+                [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+                [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+                [0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+                [0, 0, 0, 1, 3, 0, 0, 0, 0, 1, 0, 0],
+                [1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1],
+                [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 0, 0, 1, 2, 2, 1, 0, 0, 0, 1],
+                [1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 4, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ],
+            [
+                [0, 0, 3, 2, 0],
+                [0, 0, 0, 0, 0],
+                [4, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ]
         ];
-        this.loadLevel(initialLevel);
+        
+        levels.forEach(level => this.levelManager.addLevel(level));
+        this.loadLevel(0);
 
         // Start game loop
         this.gameEngine.start();
@@ -152,9 +164,24 @@ class BoxGame {
 
     showWinMessage() {
         const winMessage = document.getElementById('win-message');
+        const nextLevelBtn = document.getElementById('next-level-btn');
+        
         winMessage.style.top = '50%';
         winMessage.style.transform = 'translate(-50%, -50%)';
         winMessage.style.opacity = 1;
+        
+        if (this.levelManager.nextLevel()) {
+            nextLevelBtn.style.display = 'block';
+        } else {
+            nextLevelBtn.style.display = 'none';
+        }
+    }
+
+    handleNextLevel() {
+        this.resetLevel();
+        this.loadLevel(this.levelManager.currentLevelIndex);
+        const nextLevelBtn = document.getElementById('next-level-btn');
+        nextLevelBtn.style.display = 'none';
     }
 
     resetLevel() {
