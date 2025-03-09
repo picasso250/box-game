@@ -65,6 +65,13 @@ class BoxGame {
     loadLevel(levelData) {
         this.levelManager.loadLevel(levelData);
         this.createLevel();
+        this.updateLevelDisplay();
+    }
+
+    updateLevelDisplay() {
+        const levelInfo = document.getElementById('level-info');
+        const levelNumber = this.levelManager.currentLevelIndex + 1;
+        levelInfo.textContent = this.translator.translate('levelInfo').replace('{level}', levelNumber);
     }
 
     createLevel() {

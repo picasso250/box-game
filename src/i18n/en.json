@@ -2,5 +2,6 @@
   "gameTitle": "3D Box Game",
   "controlsInfo": "Arrow keys to move | Push boxes to red zones to win | Press R to reset level",
   "winMessage": "You Win!",
-  "nextLevel": "Next Level"
+  "nextLevel": "Next Level",
+  "levelInfo": "Level: {level}"
 }
