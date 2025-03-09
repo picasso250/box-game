@@ -3,8 +3,8 @@ class BoxGame {
     constructor() {
         this.gameEngine = new GameEngine();
         this.levelManager = new LevelManager();
-        this.player = new Player(this.gameEngine, this.levelManager);
         this.audioManager = new AudioManager(this.gameEngine);
+        this.player = new Player(this.gameEngine, this.levelManager, this.audioManager);
         this.particleSystem = new ParticleSystem(this.gameEngine);
         this.isWin = false;
         this.translator = new Translator();
@@ -19,8 +19,8 @@ class BoxGame {
         this.applyTranslations();
         
         // Load audio
-        await this.audioManager.addSound('box', 'win.mp3', 0.5);
         await this.audioManager.addSound('win', 'win.mp3', 0.8);
+        await this.audioManager.addSound('move', 'moving.mp3', 0.6);
         this.audioManager.attachToCamera(this.gameEngine.camera);
 
         // Setup controls

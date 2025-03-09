@@ -1,8 +1,9 @@
 
 class Player {
-    constructor(gameEngine, levelManager) {
+    constructor(gameEngine, levelManager, audioManager) {
         this.gameEngine = gameEngine;
         this.levelManager = levelManager;
+        this.audioManager = audioManager;
         this.mesh = null;
         this.position = { x: 0, z: 0 };
         this.gridSize = levelManager.gridSize;
@@ -39,6 +40,7 @@ class Player {
         this.position.x = newX;
         this.position.z = newZ;
         this.mesh.position.set(newX, 0.5, newZ);
+        this.audioManager.playSound('move');
         return true;
     }
 
