@@ -64,6 +64,12 @@ class BoxGame {
             }
         }
 
+        // Set up lighting
+        const light = new THREE.PointLight(0xffffff, 1, 100);
+        light.position.set(10, 10, 10);
+        this.gameEngine.addToScene(light);
+        this.gameEngine.addToScene(new THREE.AmbientLight(0x404040));
+
         // Set camera position
         const dimensions = this.levelManager.getLevelDimensions();
         this.gameEngine.camera.position.set(10, 15, 10);
