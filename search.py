@@ -114,6 +114,5 @@ while True:
     if is_enclosed(level) and is_solvable(level):
         print("[")
         for row in level:
-            print("    [%s]" % ", ".join(map(str, row)))
-        print("]")
-        break
+            print("    [%s]" % ", ".join(map(str, row)),end=",")
+        print("],")
