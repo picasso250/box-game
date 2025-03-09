@@ -16,11 +16,13 @@ class Player {
         this.mesh = new THREE.Mesh(geometry, material);
         this.mesh.position.set(position.x, 0.5, position.z);
         this.gameEngine.addToScene(this.mesh);
+        // Add player instance to updatable objects
+        this.gameEngine.updatableObjects.push(this);
         this.position = position;
 
         // Add floating animation
         this.floatAmplitude = 0.1;
-        this.floatSpeed = 2;
+        this.floatSpeed = 6;
         this.floatTime = 0;
         this.originalY = 0.5;
         
