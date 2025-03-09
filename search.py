@@ -78,25 +78,30 @@ def is_deadlock(box_pos, boxes, targets, level):
         return True
     return False
 
-def generate_6x6_level():
-    level = [[0 for _ in range(6)] for _ in range(6)]
+def generate_7x7_level():
+    level = [[0 for _ in range(7)] for _ in range(7)]
     # 随机生成墙壁
-    for i in range(6):
-        for j in range(6):
+    for i in range(7):
+        for j in range(7):
             if random.random() < 0.2:  # 20% 的概率生成墙壁
                 level[i][j] = 1
     # 确保边界都是墙壁
-    for i in range(6):
+    for i in range(7):
         level[i][0] = 1
-        level[i][5] = 1
-    for j in range(6):
+        level[i][6] = 1
+    for j in range(7):
         level[0][j] = 1
-        level[5][j] = 1
-    cells = [(i, j) for i in range(1, 5) for j in range(1, 5)]
-    player, box, target = random.sample(cells, 3)
+        level[6][j] = 1
+    cells = [(i, j) for i in range(1, 6) for j in range(1, 6)]
+    selected_cells = random.sample(cells, 5)
+    player = selected_cells[0]
+    boxes = selected_cells[1:3]
+    targets = selected_cells[3:]
     level[player[0]][player[1]] = 4
-    level[box[0]][box[1]] = 2
-    level[target[0]][target[1]] = 3
+    for box in boxes:
+        level[box[0]][box[1]] = 2
+    for target in targets:
+        level[target[0]][target[1]] = 3
     return level
 
 def is_enclosed(level):
@@ -110,9 +115,9 @@ def is_enclosed(level):
     return True
 
 while True:
-    level = generate_6x6_level()
+    level = generate_7x7_level()
     if is_enclosed(level) and is_solvable(level):
         print("[")
         for row in level:
-            print("    [%s]" % ", ".join(map(str, row)),end=",")
+            print("    [%s]" % ", ".join(map(str, row)), end=",")
         print("],")
