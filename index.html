@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>3D推箱子游戏</title>
+    <title data-i18n="gameTitle">3D Box Game</title>
     <style>
         body {
             margin: 0;
@@ -40,9 +40,9 @@
 </head>
 
 <body>
-    <div id="info">方向键移动 | 箱子推到红色区域获胜 | 按R重置关卡</div>
-    <div id="win-message">You Win!</div>
-    <button id="next-level-btn" style="display: none; position: absolute; top: 60%; left: 50%; transform: translateX(-50%); padding: 10px 20px; font-size: 24px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    <div id="info" data-i18n="controlsInfo">Arrow keys to move | Push boxes to red zones to win | Press R to reset level</div>
+    <div id="win-message" data-i18n="winMessage">You Win!</div>
+    <button id="next-level-btn" style="display: none; position: absolute; top: 60%; left: 50%; transform: translateX(-50%); padding: 10px 20px; font-size: 24px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;" data-i18n="nextLevel">
         Next Level
     </button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -51,6 +51,7 @@
     <script src="src/components/Player.js"></script>
     <script src="src/utils/AudioManager.js"></script>
     <script src="src/utils/ParticleSystem.js"></script>
+    <script src="src/i18n/Translator.js"></script>
     <script src="src/main.js"></script>
 </body>
 

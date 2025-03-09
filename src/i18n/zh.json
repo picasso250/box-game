@@ -1,0 +1,6 @@
+{
+  "gameTitle": "3D推箱子游戏",
+  "controlsInfo": "方向键移动 | 箱子推到红色区域获胜 | 按R重置关卡",
+  "winMessage": "你赢了！",
+  "nextLevel": "下一关"
+}

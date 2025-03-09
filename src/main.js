@@ -1,3 +1,4 @@
+
 class BoxGame {
     constructor() {
         this.gameEngine = new GameEngine();
@@ -6,11 +7,16 @@ class BoxGame {
         this.audioManager = new AudioManager(this.gameEngine);
         this.particleSystem = new ParticleSystem(this.gameEngine);
         this.isWin = false;
+        this.translator = new Translator();
     }
 
     async init() {
         // Initialize game engine
         this.gameEngine.init();
+        
+        // Load translations
+        await this.translator.loadTranslations();
+        this.applyTranslations();
         
         // Load audio
         await this.audioManager.addSound('box', 'win.mp3', 0.5);
@@ -164,6 +170,13 @@ class BoxGame {
         }
     }
 
+    applyTranslations() {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            element.textContent = this.translator.translate(key);
+        });
+    }
+
     showWinMessage() {
         const winMessage = document.getElementById('win-message');
         const nextLevelBtn = document.getElementById('next-level-btn');
@@ -177,6 +190,9 @@ class BoxGame {
         } else {
             nextLevelBtn.style.display = 'none';
         }
+        
+        // Update translations in case language changed
+        this.applyTranslations();
     }
 
     handleNextLevel() {
