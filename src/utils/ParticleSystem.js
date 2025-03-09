@@ -4,19 +4,22 @@ class ParticleSystem {
     }
 
     createEffect(position, options = {}) {
-        const particleCount = options.count || 50;
+        // 增加粒子数量
+        const particleCount = options.count || 200;
+        // 增加粒子大小
         const color = options.color || 0xffa500;
-        const size = options.size || 0.1;
-        const duration = options.duration || 1000;
+        const size = options.size || 0.5;
+        const duration = options.duration || 2000;
 
         const particlesGeometry = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
 
+        // 扩大粒子的初始分布范围
         for (let i = 0; i < particleCount; i++) {
             const i3 = i * 3;
-            positions[i3] = position.x + (Math.random() - 0.5) * 2;
+            positions[i3] = position.x + (Math.random() - 0.5) * 5;
             positions[i3 + 1] = position.y || 0;
-            positions[i3 + 2] = position.z + (Math.random() - 0.5) * 2;
+            positions[i3 + 2] = position.z + (Math.random() - 0.5) * 5;
         }
 
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -36,11 +39,12 @@ class ParticleSystem {
             }
 
             const positions = particles.geometry.attributes.position.array;
+            // 增加粒子的移动速度
             for (let i = 0; i < particleCount; i++) {
                 const i3 = i * 3;
-                positions[i3 + 1] += 0.05;
-                positions[i3] += (Math.random() - 0.5) * 0.1;
-                positions[i3 + 2] += (Math.random() - 0.5) * 0.1;
+                positions[i3 + 1] += 0.2;
+                positions[i3] += (Math.random() - 0.5) * 0.2;
+                positions[i3 + 2] += (Math.random() - 0.5) * 0.2;
             }
             particles.geometry.attributes.position.needsUpdate = true;
             particlesMaterial.size *= 0.95;

@@ -1,3 +1,4 @@
+
 class Player {
     constructor(gameEngine, levelManager) {
         this.gameEngine = gameEngine;
@@ -50,6 +51,18 @@ class Player {
             box.position.set(toX, this.gridSize * 0.3, toZ);
             this.boxPositions.delete(`${fromX},${fromZ}`);
             this.boxPositions.add(`${toX},${toZ}`);
+
+            // Trigger particle effect when box reaches target
+            if (this.levelManager.isTarget(toX, toZ)) {
+                const particleSystem = new ParticleSystem(this.gameEngine);
+                particleSystem.createEffect({ x: toX, z: toZ }, {
+                    color: 0x00ff00,
+                    count: 30,
+                    size: 0.8,
+                    duration: 1500
+                });
+            }
+
             return true;
         }
         return false;
