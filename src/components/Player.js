@@ -17,6 +17,20 @@ class Player {
         this.mesh.position.set(position.x, 0.5, position.z);
         this.gameEngine.addToScene(this.mesh);
         this.position = position;
+
+        // Add floating animation
+        this.floatAmplitude = 0.1;
+        this.floatSpeed = 2;
+        this.floatTime = 0;
+        this.originalY = 0.5;
+        
+    }
+
+    update(deltaTime) {
+        this.floatTime += deltaTime * this.floatSpeed;
+        const offset = Math.sin(this.floatTime) * this.floatAmplitude;
+        this.mesh.position.y = this.originalY + offset;
+        console.log(offset)
     }
 
     move(dx, dz) {

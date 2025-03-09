@@ -5,6 +5,8 @@ class GameEngine {
         this.renderer = new THREE.WebGLRenderer();
         this.isRunning = false;
         this.lastTime = 0;
+        // 新增一个数组来存储可更新的对象
+        this.updatableObjects = [];
     }
 
     init() {
@@ -39,7 +41,13 @@ class GameEngine {
     }
 
     update(deltaTime) {
-        // To be implemented by game-specific logic
+        // 遍历可更新对象数组并调用每个对象的 update 方法
+        for (let i = 0; i < this.updatableObjects.length; i++) {
+            const object = this.updatableObjects[i];
+            if (object.update) {
+                object.update(deltaTime);
+            }
+        }
     }
 
     render() {
@@ -54,15 +62,26 @@ class GameEngine {
 
     addToScene(object) {
         this.scene.add(object);
+        // 如果对象有 update 方法，则将其添加到可更新对象数组中
+        if (object.update) {
+            this.updatableObjects.push(object);
+        }
     }
 
     removeFromScene(object) {
         this.scene.remove(object);
+        // 从可更新对象数组中移除该对象
+        const index = this.updatableObjects.indexOf(object);
+        if (index > -1) {
+            this.updatableObjects.splice(index, 1);
+        }
     }
 
     clearScene() {
-        while(this.scene.children.length > 0) { 
-            this.scene.remove(this.scene.children[0]); 
+        while (this.scene.children.length > 0) {
+            this.scene.remove(this.scene.children[0]);
         }
+        // 清空可更新对象数组
+        this.updatableObjects = [];
     }
 }
