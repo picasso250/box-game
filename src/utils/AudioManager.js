@@ -40,7 +40,3 @@ class AudioManager {
     }
 }
 
-    attachToCamera(camera) {
-        camera.add(this.audioListener);
-    }
-}
