@@ -180,13 +180,7 @@ class BoxGame {
     }
 
     handleNextLevel() {
-        this.resetLevel();
-        this.loadLevel(this.levelManager.currentLevelIndex);
-        const nextLevelBtn = document.getElementById('next-level-btn');
-        nextLevelBtn.style.display = 'none';
-    }
 
-    resetLevel() {
         // Hide win message
         const winMessage = document.getElementById('win-message');
         winMessage.style.top = '-100px';
@@ -194,6 +188,16 @@ class BoxGame {
 
         // Reset game state
         this.isWin = false;
+        
+        this.gameEngine.clearScene();
+        // this.resetLevel();
+        this.loadLevel(this.levelManager.currentLevelIndex);
+        const nextLevelBtn = document.getElementById('next-level-btn');
+        nextLevelBtn.style.display = 'none';
+    }
+
+    resetLevel() {
+        
         this.gameEngine.clearScene();
         this.levelManager.resetLevel();
         this.player.reset();
