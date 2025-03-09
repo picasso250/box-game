@@ -215,8 +215,8 @@ class BoxGame {
         this.isWin = false;
         
         this.gameEngine.clearScene();
-        // this.resetLevel();
         this.loadLevel(this.levelManager.currentLevelIndex);
+        this.resetLevel();
         const nextLevelBtn = document.getElementById('next-level-btn');
         nextLevelBtn.style.display = 'none';
     }
